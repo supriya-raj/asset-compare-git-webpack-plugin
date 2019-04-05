@@ -1,0 +1,30 @@
+{
+  "name": "asset-compare-git-webpack-plugin",
+  "version": "1.0.0",
+  "description": "A webpack plugin that compares the generated asset sizes against those of a base branch as part of a CI build",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supriya-raj/asset-compare-git-webpack-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/supriya-raj/asset-compare-git-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/supriya-raj/asset-compare-git-webpack-plugin",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Supriya S <supriyaraj47@gmail.com>",
+  "license": "ISC",
+  "peerDependencies": {
+    "webpack": "4"
+  },
+  "devDependencies": {
+    "webpack": "4.29.6"
+  },
+  "dependencies": {
+    "@octokit/rest": "16.23.2",
+    "lodash": "4.17.11",
+    "tty-table": "2.7.0"
+  }
+}
