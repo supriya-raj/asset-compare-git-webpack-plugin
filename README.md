@@ -27,7 +27,7 @@ module.exports = {
 };
 ```
 
-This will generate a table in your CI log comparing the generated asset sizes of the current build against those of a base branch(master by default). A sta
+This will generate a table in your CI log comparing the generated asset sizes of the current build against those of a base branch(master by default). After comparison, if any of the asset sizes has increased by more than 5% a status with failure flag is created against the current commit.
 
 - When this plugin is run against the base branch for the first time, it stores the asset sizes in the supplied gist.
 - Every consequent CI run against the base branch will keep updating the stats in the gist.
@@ -37,7 +37,7 @@ This will generate a table in your CI log comparing the generated asset sizes of
 Type: `String`<br>
 Required: `True`
 
-This is the only required option for the plugin to work. Create a github gist and pass the gist_id here. This gist will be used to store/update the asset sizes of the base branch
+This is a required option for the plugin to work. Create a github gist and pass the gist_id here. This gist will be used to store/update the asset sizes of the base branch
 
 ### `options.base_branch`
 
@@ -52,4 +52,4 @@ Type: `String`<br>
 Default: `env.GITHUB_ACCESS_TOKEN`
 
 Personal access token used for performing git actions
-> CAUTION: Make sure that the owner of access token you pass here is also the owner of the gist that is passed to plugin. The access token must have permissions to add status updates to commits and also to update gists
+> CAUTION: Make sure that the owner associated with this access token is also the owner of the gist that is passed to plugin. The access token must have permissions to add status updates to commits and also to update gists
