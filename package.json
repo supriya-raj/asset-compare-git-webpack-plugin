@@ -1,6 +1,6 @@
 {
   "name": "asset-compare-git-webpack-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A webpack plugin that compares the generated asset sizes against those of a base branch as part of a CI build",
   "main": "index.js",
   "repository": {
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@octokit/rest": "16.23.2",
-    "console.table": "0.10.0",
+    "cli-table": "0.3.1",
     "lodash": "4.17.11",
     "markdown-table": "1.1.2"
   }
