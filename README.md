@@ -49,7 +49,7 @@ The branch, the asset sizes of which will be used to benchmark all other builds
 ### `options.github_access_token`
 
 Type: `String`<br>
-Default: `env.GITHUB_ACCESS_TOKEN`
+Default: `env.GITHUB_PERSONAL_TOKEN`
 
 Personal access token used for performing git actions
 > CAUTION: Make sure that the owner associated with this access token is also the owner of the gist that is passed to plugin. The access token must have permissions to add status updates to commits and also to update gists
