@@ -1,8 +1,8 @@
 # Asset Compare Git Webpack Plugin
 
-A webpack plugin that compares the generated asset sizes against those of a base branch as part of a CI build.
+A zero configuration webpack plugin that compares the generated asset sizes of any given pull request/branch against those of master as part of a CI build.
 
-> NOTE: Currently Travis is the only CI environment that is supported
+> NOTE: Currently Travis and Github actions are the only CI environments supported
 
 ## Install
 
@@ -20,36 +20,18 @@ var AssetComparePlugin = require('asset-compare-git-webpack-plugin');
 module.exports = {
     // ...
     plugins: [
-      new AssetComparePlugin({
-        gist_id: <a github gist id>//required
-      })
+      new AssetComparePlugin()
     ]
 };
 ```
+- The plugin automatically detects which CI environment it is running in(via default environment variables that the CI sets) and logs a table in the CI console comparing the asset sizes of the current build against those of master.
+- It also creates a status check againt the last commit(of the pr/branch) which triggered the build. The check is a failure if any of the asset sizes has increased by more than 5% and a success otherwise.
+- The asset sizes of master are obtained from a json file(`webpack-asset-sizes.json`) that this plugin maintains on the master branch of your repo.
+- When a pr containing this plugin integration is merged into your master branch for the first time, it creates this json file.
+- Every consequent pull request merge/push into master branch will keep updating this json file.
 
-This will generate a table in your CI log comparing the generated asset sizes of the current build against those of a base branch(master by default). After comparison, if any of the asset sizes has increased by more than 5% a status with failure flag is created against the current commit.
+### Note
 
-- When this plugin is run against the base branch for the first time, it stores the asset sizes in the supplied gist.
-- Every consequent CI run against the base branch will keep updating the stats in the gist.
-
-### `options.gist_id`
-
-Type: `String`<br>
-Required: `True`
-
-This is a required option for the plugin to work. Create a github gist and pass the gist_id here. This gist will be used to store/update the asset sizes of the base branch
-
-### `options.base_branch`
-
-Type: `String`
-Default: `master`
-
-The branch, the asset sizes of which will be used to benchmark all other builds
-
-### `options.github_access_token`
-
-Type: `String`<br>
-Default: `env.GITHUB_PERSONAL_TOKEN`
-
-Personal access token used for performing git actions
-> CAUTION: Make sure that the owner associated with this access token is also the owner of the gist that is passed to plugin. The access token must have permissions to add status updates to commits and also to update gists
+The only thing required for this plugin to work is a personal access token from github.
+The plugin expects to find this in the `GITHUB_PERSONAL_TOKEN` environment variable
+>The access token must have permissions to read/write from/into the repo.
